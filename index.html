@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pulley Momentum Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .input-section {
+            padding: 40px;
+            background: #f8f9fa;
+        }
+
+        .results-section {
+            padding: 40px;
+            background: white;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #34495e;
+            font-size: 1.1em;
+        }
+
+        .input-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .slider {
+            flex: 1;
+            height: 8px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #3498db;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #3498db;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .input-number {
+            width: 80px;
+            padding: 8px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .input-number:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        .unit {
+            min-width: 60px;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-title {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .result-value {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .result-unit {
+            font-size: 1em;
+            opacity: 0.8;
+        }
+
+        .physics-info {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .physics-info h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .physics-info p {
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .input-section, .results-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Pulley Momentum Calculator</h1>
+            <p>Interactive physics calculator for rotational dynamics in pulley systems</p>
+        </div>
+        
+        <div class="main-content">
+            <div class="input-section">
+                <h2 class="section-title">System Parameters</h2>
+                
+                <div class="input-group">
+                    <label class="input-label">Pulley Radius (r)</label>
+                    <div class="input-container">
+                        <input type="range" class="slider" id="radiusSlider" min="0.1" max="2.0" step="0.1" value="0.5">
+                        <input type="number" class="input-number" id="radiusInput" min="0.1" max="2.0" step="0.1" value="0.5">
+                        <span class="unit">m</span>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Moment of Inertia (I)</label>
+                    <div class="input-container">
+                        <input type="range" class="slider" id="inertiaSlider" min="0.1" max="5.0" step="0.1" value="1.0">
+                        <input type="number" class="input-number" id="inertiaInput" min="0.1" max="5.0" step="0.1" value="1.0">
+                        <span class="unit">kg⋅m²</span>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Hanging Mass (m)</label>
+                    <div class="input-container">
+                        <input type="range" class="slider" id="massSlider" min="1" max="50" step="1" value="10">
+                        <input type="number" class="input-number" id="massInput" min="1" max="50" step="1" value="10">
+                        <span class="unit">kg</span>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Descent Height (h)</label>
+                    <div class="input-container">
+                        <input type="range" class="slider" id="heightSlider" min="0.5" max="10.0" step="0.5" value="2.0">
+                        <input type="number" class="input-number" id="heightInput" min="0.5" max="10.0" step="0.5" value="2.0">
+                        <span class="unit">m</span>
+                    </div>
+                </div>
+                
+                <div class="physics-info">
+                    <h3>Physics Principles</h3>
+                    <p>This calculator uses conservation of energy and rotational kinematics. As the hanging mass falls, gravitational potential energy converts to both linear and rotational kinetic energy.</p>
+                </div>
+            </div>
+            
+            <div class="results-section">
+                <h2 class="section-title">Calculated Results</h2>
+                
+                <div class="result-card">
+                    <div class="result-title">Angular Displacement</div>
+                    <div class="result-value" id="angularDisplacement">4.00</div>
+                    <div class="result-unit">radians</div>
+                </div>
+                
+                <div class="result-card" style="background: linear-gradient(135deg, #a29bfe, #6c5ce7);">
+                    <div class="result-title">Angular Speed</div>
+                    <div class="result-value" id="angularSpeed">5.29</div>
+                    <div class="result-unit">rad/s</div>
+                </div>
+                
+                <div class="result-card" style="background: linear-gradient(135deg, #fd79a8, #e84393);">
+                    <div class="result-title">Angular Momentum</div>
+                    <div class="result-value" id="angularMomentum">5.29</div>
+                    <div class="result-unit">kg⋅m²/s</div>
+                </div>
+                
+                <div class="result-card" style="background: linear-gradient(135deg, #00b894, #00a085);">
+                    <div class="result-title">Angular Energy</div>
+                    <div class="result-value" id="angularEnergy">14.00</div>
+                    <div class="result-unit">Joules</div>
+                </div>
+                
+                <div class="physics-info">
+                    <h3>Equations Used</h3>
+                    <p><strong>θ = h/r</strong><br>
+                    <strong>ω = √(2mgh/(mr² + I))</strong><br>
+                    <strong>L = Iω</strong><br>
+                    <strong>KE_rot = ½Iω²</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get all input elements
+        const radiusSlider = document.getElementById('radiusSlider');
+        const radiusInput = document.getElementById('radiusInput');
+        const inertiaSlider = document.getElementById('inertiaSlider');
+        const inertiaInput = document.getElementById('inertiaInput');
+        const massSlider = document.getElementById('massSlider');
+        const massInput = document.getElementById('massInput');
+        const heightSlider = document.getElementById('heightSlider');
+        const heightInput = document.getElementById('heightInput');
+
+        // Get result display elements
+        const angularDisplacementEl = document.getElementById('angularDisplacement');
+        const angularSpeedEl = document.getElementById('angularSpeed');
+        const angularMomentumEl = document.getElementById('angularMomentum');
+        const angularEnergyEl = document.getElementById('angularEnergy');
+
+        // Physics calculations
+        function calculateResults() {
+            const r = parseFloat(radiusInput.value);
+            const I = parseFloat(inertiaInput.value);
+            const m = parseFloat(massInput.value);
+            const h = parseFloat(heightInput.value);
+            const g = 9.81; // acceleration due to gravity
+
+            // Angular displacement: θ = h/r
+            const angularDisplacement = h / r;
+
+            // Angular speed: From energy conservation
+            // mgh = ½mv² + ½Iω² and v = ωr
+            // Solving for ω: ω = √(2mgh/(mr² + I))
+            const angularSpeed = Math.sqrt((2 * m * g * h) / (m * r * r + I));
+
+            // Angular momentum: L = Iω
+            const angularMomentum = I * angularSpeed;
+
+            // Angular energy: KE_rot = ½Iω²
+            const angularEnergy = 0.5 * I * angularSpeed * angularSpeed;
+
+            // Update display
+            angularDisplacementEl.textContent = angularDisplacement.toFixed(2);
+            angularSpeedEl.textContent = angularSpeed.toFixed(2);
+            angularMomentumEl.textContent = angularMomentum.toFixed(2);
+            angularEnergyEl.textContent = angularEnergy.toFixed(2);
+        }
+
+        // Sync slider and input values
+        function syncInputs(slider, input) {
+            slider.addEventListener('input', () => {
+                input.value = slider.value;
+                calculateResults();
+            });
+            
+            input.addEventListener('input', () => {
+                slider.value = input.value;
+                calculateResults();
+            });
+        }
+
+        // Set up input synchronization
+        syncInputs(radiusSlider, radiusInput);
+        syncInputs(inertiaSlider, inertiaInput);
+        syncInputs(massSlider, massInput);
+        syncInputs(heightSlider, heightInput);
+
+        // Initial calculation
+        calculateResults();
+    </script>
+</body>
+</html> 

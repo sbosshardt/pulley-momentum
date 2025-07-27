@@ -1,0 +1,70 @@
+# Pulley Momentum Calculator
+
+A web-based physics calculator for analyzing pulley systems with hanging masses. This interactive tool allows users to explore the relationship between linear and rotational motion in pulley systems.
+
+## Overview
+
+This application calculates key rotational dynamics quantities for a pulley system where a hanging mass descends under gravity. As the mass falls, it causes the pulley to rotate, converting gravitational potential energy into both linear and rotational kinetic energy.
+
+## Physics Concepts
+
+The calculator implements fundamental physics principles including:
+
+- **Conservation of Energy**: Total mechanical energy is conserved as potential energy converts to kinetic energy
+- **Rotational Kinematics**: Relationships between angular displacement, velocity, and acceleration
+- **Linear-Angular Motion**: The connection between linear motion of the hanging mass and angular motion of the pulley
+
+## Calculated Metrics
+
+The application computes the following quantities when the hanging mass reaches the bottom of its descent:
+
+1. **Angular Displacement (θ)**: Total angle through which the pulley rotates (in radians)
+2. **Angular Speed (ω)**: Final rotational speed of the pulley (in rad/s)
+3. **Angular Momentum (L)**: Rotational momentum of the pulley system (in kg⋅m²/s)
+4. **Angular Energy (KE_rot)**: Rotational kinetic energy of the pulley (in Joules)
+
+## Input Parameters
+
+Users can customize the following system parameters:
+
+- **Pulley Radius (r)**: Physical radius of the pulley wheel (in meters)
+- **Moment of Inertia (I)**: Rotational inertia of the pulley (in kg⋅m²)
+- **Hanging Mass (m)**: Mass of the falling weight (in kg)
+- **Descent Height (h)**: Distance the mass falls (in meters)
+
+## Key Physics Equations
+
+The calculations are based on these fundamental relationships:
+
+```
+Energy Conservation: mgh = ½mv² + ½Iω²
+Linear-Angular Relation: v = ωr
+Angular Displacement: θ = h/r
+Angular Momentum: L = Iω
+Rotational Energy: KE_rot = ½Iω²
+```
+
+## Usage
+
+1. Open `index.html` in a web browser
+2. Adjust the input sliders or enter values directly
+3. Observe real-time calculations as parameters change
+4. Results update automatically with each parameter modification
+
+## Files
+
+- `index.html`: Complete web application with HTML, CSS, and JavaScript
+- `README.md`: This documentation file
+- `Pully Momentum Problem.jpg`: Reference diagram (if available)
+
+## Educational Value
+
+This tool is ideal for:
+- Physics students learning rotational dynamics
+- Visualizing energy conservation in mechanical systems
+- Understanding the relationship between linear and angular motion
+- Exploring how system parameters affect motion characteristics
+
+## Browser Compatibility
+
+The application uses standard HTML5, CSS3, and JavaScript and should work in all modern web browsers. 
