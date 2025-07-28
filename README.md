@@ -32,17 +32,65 @@ Users can customize the following system parameters:
 - **Hanging Mass (m)**: Mass of the falling weight (in kg)
 - **Descent Height (h)**: Distance the mass falls (in meters)
 
-## Key Physics Equations
+## Physics Derivations
 
-The calculations are based on these fundamental relationships:
+The calculator implements two equivalent approaches to derive the angular velocity ω:
+
+### Method 1: Energy Conservation Approach
+
+Based on conservation of mechanical energy:
 
 ```
-Energy Conservation: mgh = ½mv² + ½Iω²
-Linear-Angular Relation: v = ωr
+Initial Energy = Final Energy
+mgh = ½mv² + ½Iω²
+
+Using v = ωr:
+mgh = ½m(ωr)² + ½Iω²
+mgh = ½ω²(mr² + I)
+
+Solving for ω:
+ω = √(2mgh/(mr² + I))
+```
+
+### Method 2: Force Analysis Approach
+
+Using Newton's laws and rotational dynamics:
+
+```
+Forces on hanging mass:    mg - T = ma
+Torque on pulley:         τ = Tr = Iα
+No-slip condition:        a = αr, so α = a/r
+
+From pulley rotation:     Tr = I(a/r)
+Solving for tension:      T = Ia/r²
+
+Substituting into force equation:
+mg - Ia/r² = ma
+mg = a(m + I/r²)
+a = mg/(m + I/r²)
+
+Using kinematics v² = 2ah:
+v = √(2ah) = √(2gmh/(m + I/r²))
+
+Converting to angular velocity:
+ω = v/r = √(2gmh/(mr² + I))
+```
+
+### Additional Key Equations
+
+```
 Angular Displacement: θ = h/r
 Angular Momentum: L = Iω
 Rotational Energy: KE_rot = ½Iω²
+Linear Acceleration: a = mg/(m + I/r²)
 ```
+
+### Physical Insights
+
+- The system acceleration `a = mg/(m + I/r²)` is always less than free fall `g`
+- More pulley inertia (larger I) results in slower acceleration and final speeds
+- The no-slip condition couples linear and angular motion: `v = ωr`
+- Both derivation methods yield identical results, demonstrating the equivalence of energy and force approaches
 
 ## Usage
 
