@@ -274,12 +274,33 @@
                     <div class="result-unit">Joules</div>
                 </div>
                 
+                <div class="result-card" style="background: linear-gradient(135deg, #ff7675, #d63031);">
+                    <div class="result-title">Fall Duration</div>
+                    <div class="result-value" id="fallDuration">0.91</div>
+                    <div class="result-unit">seconds</div>
+                </div>
+                
+                <div class="result-card" style="background: linear-gradient(135deg, #fdcb6e, #e17055);">
+                    <div class="result-title">Linear Acceleration</div>
+                    <div class="result-value" id="linearAcceleration">4.91</div>
+                    <div class="result-unit">m/s²</div>
+                </div>
+                
+                <div class="result-card" style="background: linear-gradient(135deg, #55a3ff, #3742fa);">
+                    <div class="result-title">Final Velocity</div>
+                    <div class="result-value" id="finalVelocity">4.43</div>
+                    <div class="result-unit">m/s</div>
+                </div>
+                
                 <div class="physics-info">
                     <h3>Equations Used</h3>
                     <p><strong>θ = h/r</strong><br>
                     <strong>ω = √(2mgh/(mr² + I))</strong><br>
                     <strong>L = Iω</strong><br>
-                    <strong>KE_rot = ½Iω²</strong></p>
+                    <strong>KE_rot = ½Iω²</strong><br>
+                    <strong>a = mg/(m + I/r²)</strong><br>
+                    <strong>v = √(2gmh/(m + I/r²))</strong><br>
+                    <strong>t = √(2h(m + I/r²)/(mg))</strong></p>
                 </div>
             </div>
         </div>
@@ -301,6 +322,9 @@
         const angularSpeedEl = document.getElementById('angularSpeed');
         const angularMomentumEl = document.getElementById('angularMomentum');
         const angularEnergyEl = document.getElementById('angularEnergy');
+        const fallDurationEl = document.getElementById('fallDuration');
+        const linearAccelerationEl = document.getElementById('linearAcceleration');
+        const finalVelocityEl = document.getElementById('finalVelocity');
 
         // Physics calculations
         function calculateResults() {
@@ -324,11 +348,23 @@
             // Angular energy: KE_rot = ½Iω²
             const angularEnergy = 0.5 * I * angularSpeed * angularSpeed;
 
+            // Linear acceleration: a = mg/(m + I/r²)
+            const linearAcceleration = (m * g) / (m + I / (r * r));
+
+            // Final linear velocity: v = √(2gmh/(m + I/r²))
+            const finalVelocity = Math.sqrt((2 * g * m * h) / (m + I / (r * r)));
+
+            // Fall duration: t = √(2h(m + I/r²)/(mg))
+            const fallDuration = Math.sqrt((2 * h * (m + I / (r * r))) / (m * g));
+
             // Update display
             angularDisplacementEl.textContent = angularDisplacement.toFixed(2);
             angularSpeedEl.textContent = angularSpeed.toFixed(2);
             angularMomentumEl.textContent = angularMomentum.toFixed(2);
             angularEnergyEl.textContent = angularEnergy.toFixed(2);
+            fallDurationEl.textContent = fallDuration.toFixed(2);
+            linearAccelerationEl.textContent = linearAcceleration.toFixed(2);
+            finalVelocityEl.textContent = finalVelocity.toFixed(2);
         }
 
         // Sync slider and input values

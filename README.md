@@ -18,10 +18,16 @@ The calculator implements fundamental physics principles including:
 
 The application computes the following quantities when the hanging mass reaches the bottom of its descent:
 
+### Rotational Quantities (Pulley)
 1. **Angular Displacement (θ)**: Total angle through which the pulley rotates (in radians)
 2. **Angular Speed (ω)**: Final rotational speed of the pulley (in rad/s)
 3. **Angular Momentum (L)**: Rotational momentum of the pulley system (in kg⋅m²/s)
 4. **Angular Energy (KE_rot)**: Rotational kinetic energy of the pulley (in Joules)
+
+### Linear Quantities (Hanging Mass)
+5. **Fall Duration (t)**: Time required for the mass to fall the height h (in seconds)
+6. **Linear Acceleration (a)**: Constant acceleration of the hanging mass (in m/s²)
+7. **Final Velocity (v)**: Linear velocity of the mass when it reaches the bottom (in m/s)
 
 ## Input Parameters
 
@@ -72,6 +78,9 @@ a = mg/(m + I/r²)
 Using kinematics v² = 2ah:
 v = √(2ah) = √(2gmh/(m + I/r²))
 
+Using kinematics h = ½at² for fall duration:
+t = √(2h/a) = √(2h(m + I/r²)/(mg))
+
 Converting to angular velocity:
 ω = v/r = √(2gmh/(mr² + I))
 ```
@@ -83,6 +92,8 @@ Angular Displacement: θ = h/r
 Angular Momentum: L = Iω
 Rotational Energy: KE_rot = ½Iω²
 Linear Acceleration: a = mg/(m + I/r²)
+Final Linear Velocity: v = √(2gmh/(m + I/r²))
+Fall Duration: t = √(2h(m + I/r²)/(mg))
 ```
 
 ### Physical Insights
